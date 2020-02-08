@@ -5,12 +5,12 @@ const formatTime = time => {
   let minutes = Math.floor(time / 60);
   let seconds = time % 60;
   if (minutes < 10) {
-    minutes = '0' + minutes;
+    minutes = "0" + minutes;
   }
   if (seconds < 10) {
-    seconds = '0' + seconds;
+    seconds = "0" + seconds;
   }
-  const definedTime = minutes + ':' + seconds;
+  const definedTime = minutes + ":" + seconds;
   return definedTime;
 };
 
@@ -25,8 +25,17 @@ class App extends React.Component {
     };
   }
 
+  step = () => {};
+
+  startTimer = () => {
+    this.setState({
+      timer: setInterval(this.step, 1000),
+      status: "work"
+    });
+  };
+
   render() {
-    const { status } = this.state;
+    const { status, time, timer } = this.state;
 
     return (
       <div>
@@ -46,8 +55,12 @@ class App extends React.Component {
         )}
         {status === "work" && <img src="./images/work.png" />}
         {status === "rest" && <img src="./images/rest.png" />}
-        {status !== "off" && <div className="timer">18:23</div>}
-        {status === "off" && <button className="btn">Start</button>}
+        {status !== "off" && <div className="timer">{formatTime(time)}</div>}
+        {status === "off" && (
+          <button className="btn" onClick={this.startTimer}>
+            Start
+          </button>
+        )}
         {status !== "off" && <button className="btn">Stop</button>}
         <button className="btn btn-close">X</button>
       </div>
