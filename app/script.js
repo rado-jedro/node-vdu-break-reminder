@@ -54,6 +54,10 @@ class App extends React.Component {
     });
   };
 
+  closeApp() {
+    window.close();
+  }
+
   render() {
     const { status, time, timer } = this.state;
 
@@ -86,7 +90,9 @@ class App extends React.Component {
             Stop
           </button>
         )}
-        <button className="btn btn-close">X</button>
+        <button className="btn btn-close" onClick={this.closeApp}>
+          X
+        </button>
       </div>
     );
   }
