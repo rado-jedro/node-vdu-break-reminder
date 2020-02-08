@@ -1,6 +1,19 @@
 import React from "react";
 import { render } from "react-dom";
 
+const formatTime = time => {
+  let minutes = Math.floor(time / 60);
+  let seconds = time % 60;
+  if (minutes < 10) {
+    minutes = '0' + minutes;
+  }
+  if (seconds < 10) {
+    seconds = '0' + seconds;
+  }
+  const definedTime = minutes + ':' + seconds;
+  return definedTime;
+};
+
 class App extends React.Component {
   constructor() {
     super();
